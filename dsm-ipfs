@@ -23,7 +23,7 @@ qdbus $dbusRef close
 	printf "%-17s %s\n" "name:" "$name"
 	printf "%-17s %s\n" "size:" "$size"
 	printf "%-17s %s\n" "url:" "$url"
-	printf "\n\n\n\nThe URL is copied to your clipboard!"
+	printf "\n\nThe URL is copied to your clipboard!"
 } > "$DATA_FILE"
 
 echo $url | xclip -selection clipboard
