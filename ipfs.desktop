@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Service
+MimeType=image/*
+		 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+		 Actions=Upload
+		 X-KDE-Priority=TopLevel
+		 X-KDE-Submenu=IPFS
+
+		 [Desktop Action Upload]
+		 Name=Upload
+		 Name[de]=Hochladen
+		 Name[en]=Upload
+		 Icon=kipi-ipfs
+		 Exec=dsm-ipfs %u

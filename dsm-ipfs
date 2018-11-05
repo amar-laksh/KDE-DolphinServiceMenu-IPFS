@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+SCRIPTNAME=$(basename "$0")
+DATA_FILE="/tmp/$SCRIPTNAME"
+
+if [ "$#" -ne 1 ]; then
+	kdialog --title IPFS --error "only one file can be uploaded" &>/dev/null
+	exit 1
+fi
+
+name=$(echo $1)
+dbusRef=`kdialog --title IPFS --progressbar "Uploading..." 4`
+qdbus $dbusRef showCancelButton false
+
+
+res=$(curl --silent -X POST -H "Content-Type: multipart/form-data" -F "name=keyphrase" -F "name=user" -H "Content-Type: image/jpeg"  -F "file=@$1" https://api.globalupload.io/transport/add)
+uri=$(echo $res | cut -d "," -f2 | cut -d "\"" -f4)
+size=$(echo $res | cut -d "," -f3 | cut -d "\"" -f4)
+url=$(echo "https://gateway.ipfs.io/ipfs/$uri")
+qdbus $dbusRef close
+
+{
+	printf "%-17s %s\n" "name:" "$name"
+	printf "%-17s %s\n" "size:" "$size"
+	printf "%-17s %s\n" "url:" "$url"
+	printf "\n\n\n\nThe URL is copied to your clipboard!"
+} > "$DATA_FILE"
+
+kdialog  --title IPFS --textbox "$DATA_FILE" &>/dev/null
+echo $url | xclip -selection clipboard
+
+
+
