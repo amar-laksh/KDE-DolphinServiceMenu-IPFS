@@ -9,7 +9,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 name=$(echo $1)
-dbusRef=`kdialog --title IPFS --progressbar "Uploading..." 4`
+dbusRef=`kdialog --title IPFS --progressbar "Uploading..." 0`
 qdbus $dbusRef showCancelButton false
 
 
@@ -26,8 +26,9 @@ qdbus $dbusRef close
 	printf "\n\n\n\nThe URL is copied to your clipboard!"
 } > "$DATA_FILE"
 
-kdialog  --title IPFS --textbox "$DATA_FILE" &>/dev/null
 echo $url | xclip -selection clipboard
+kdialog  --title IPFS --textbox "$DATA_FILE" &>/dev/null
+
 
 
 
