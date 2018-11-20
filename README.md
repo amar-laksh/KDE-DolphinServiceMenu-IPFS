@@ -1,6 +1,6 @@
 # KDE-DolphinServiceMenu-IPFS
 
-Upload images on IPFS through the globalupload.io
+Upload files on IPFS through the globalupload.io
 
 ### Prerequisites
 
